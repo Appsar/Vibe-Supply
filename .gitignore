@@ -7,7 +7,8 @@
 /bazel-out
 
 # Node
-/node_modules
+**/node_modules/
+node_modules/
 npm-debug.log
 yarn-error.log
 
@@ -42,3 +43,14 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# SQLite Database
+*.db
+*.db-journal
+
+# Angular cache & build output
+**/.angular/
+dist/
+
+# Environment files
+.env
