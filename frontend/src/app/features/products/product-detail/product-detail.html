@@ -1,1 +1,24 @@
-<p>product-detail works!</p>
+<main>
+  <a
+    routerLink="/products"
+    class="bg-purple-400 ml-5 font-bold inline-block rounded-2xl p-2 shadow-2xl hover:scale-105 transition-transform duration-200"
+    ><- Back to Products</a
+  >
+
+  <div class="flex flex-col justify-center items-center gap-5">
+    @if (product(); as p) {
+      <img src="p.image_url" />
+      <h3>{{ p.name }}</h3>
+      <p>{{ p.price | currency }}</p>
+      <p>{{ p.description }}</p>
+      <p>{{ 'In stock - ' + p.stock + ' left' }}</p>
+      <button
+        class="bg-green-400 rounded-2xl p-2 shadow-2xl hover:scale-105 transition-transform duration-200"
+      >
+        Add to cart
+      </button>
+    } @else {
+      <p>Loading...</p>
+    }
+  </div>
+</main>
