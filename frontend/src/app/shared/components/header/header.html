@@ -2,4 +2,14 @@
   <a routerLink="/">Vibe Supply</a>
   <span> | </span>
   <a routerLink="/products">Till Produkterna</a>
+  <span> | </span>
+  @if (isLoggedIn()) {
+    <a routerLink="/user">Account Page</a>
+    <span> | </span>
+    <button (click)="logout()">Log Out</button>
+  } @else {
+    <a routerLink="/login">Login</a>
+  }
+  <span> | </span>
+  <a routerLink="/cart">Cart</a>
 </nav>

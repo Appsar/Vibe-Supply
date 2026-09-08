@@ -2,15 +2,22 @@
 
 <div class="flex gap-10 justify-center">
   @for (product of products(); track product.id) {
-    <div class="product-card">
+    <div class="product-card flex flex-col">
       <img [src]="product.image_url" [alt]="product.name" />
       <h3>{{ product.name }}</h3>
       <p>{{ product.price }}</p>
       <a
         [routerLink]="['/products', product.id]"
-        class="inline-block font-bold transition-transform duration-200 hover:scale-125"
+        class="inline-block font-bold transition-transform duration-200 hover:scale-105"
         >More details</a
       >
+      <button class="bg-green-400 rounded-2xl p-1.5 hover:sc">
+        <span
+          class="hover:scale-105 inline-block duration-200 font-medium"
+          (click)="cartService.addToCart(product, 1)"
+          >Add to cart</span
+        >
+      </button>
     </div>
   }
 </div>

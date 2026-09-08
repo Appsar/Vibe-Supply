@@ -1,0 +1,17 @@
+<div class="flex justify-center">
+  <h2 class="text-4xl font-medium">Your shopping cart:</h2>
+</div>
+
+<div class="flex justify-center text-2xl">
+  <ul class="flex flex-col items-center">
+    @for (item of cartService.getCartItems(); track item.product.id) {
+      <li>
+        {{ item.product.name }}
+      </li>
+      <p>{{ item.quantity }}</p>
+      <li>{{ item.product.price | currency }}</li>
+    }
+    <p>Cart items: {{ cartService.getTotalQuantity() }}</p>
+    <p>Total price: {{ cartService.getTotalPrice() | currency }}</p>
+  </ul>
+</div>

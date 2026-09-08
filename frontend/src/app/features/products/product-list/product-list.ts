@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductsService } from '../products';
 import { Product } from '../../../shared/models/product.model';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../../core/services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,6 +14,7 @@ import { RouterLink } from '@angular/router';
 export class ProductList implements OnInit {
   private productService = inject(ProductsService);
   products = signal<Product[]>([]);
+  cartService = inject(CartService);
 
   ngOnInit(): void {
     this.productService.getAll().subscribe({
