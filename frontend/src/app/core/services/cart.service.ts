@@ -49,6 +49,16 @@ export class CartService {
     });
   }
 
+  clearItem(product: Product): void {
+    this.cartList.update((current) => {
+      return current.filter((e) => e.product.id !== product.id);
+    });
+  }
+
+  isEmpty(): boolean {
+    return this.cartList().length === 0;
+  }
+
   getCartItems(): CartItem[] {
     return this.cartList();
   }

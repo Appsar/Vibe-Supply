@@ -1,0 +1,57 @@
+<h1 class="flex text-4xl font-bold underline mb-3 justify-center">Checkout</h1>
+<app-cart [showCheckoutButton]="false" />
+
+<div class="flex justify-center mb-5 text-3xl">
+  <h2>Kunduppgifter</h2>
+</div>
+
+<form
+  class="flex flex-col gap-5 max-w-2xl mx-auto"
+  [class.opacity-40]="cartService.isEmpty()"
+  [class.pointer-events-none]="cartService.isEmpty()"
+>
+  <div class="flex gap-5">
+    <label class="flex flex-col flex-1"
+      >Förnamn
+      <input class="border-2 rounded-lg p-2" />
+    </label>
+
+    <label class="flex flex-col flex-1"
+      >Efternamn
+      <input class="border-2 rounded-lg p-2" />
+    </label>
+  </div>
+
+  <label class="flex flex-col"
+    >E-post
+    <input type="email" class="border-2 rounded-lg p-2" />
+  </label>
+
+  <fieldset class="border-2 rounded-lg p-5 flex flex-col gap-4">
+    <legend class="px-2">Adress</legend>
+
+    <label class="flex flex-col"
+      >Gata
+      <input class="border-2 rounded-lg p-2" />
+    </label>
+
+    <label class="flex flex-col w-40"
+      >Postnummer
+      <input class="border-2 rounded-lg p-2" />
+    </label>
+
+    <label class="flex flex-col"
+      >Stad
+      <input class="border-2 rounded-lg p-2" />
+    </label>
+  </fieldset>
+
+  <label class="flex items-center gap-2">
+    <input type="checkbox" />
+    Jag vill ta emot nyhetsbrev
+  </label>
+
+  <div class="flex justify-center">
+    <button type="button" class="border-2 w-fit px-8 p-2 rounded-2xl">Köp</button>
+  </div>
+</form>

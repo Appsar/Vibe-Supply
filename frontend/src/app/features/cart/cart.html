@@ -2,16 +2,38 @@
   <h2 class="text-4xl font-medium">Your shopping cart:</h2>
 </div>
 
-<div class="flex justify-center text-2xl">
+<div class="flex justify-center flex-col text-2xl">
+  @if (cartService.isEmpty()) {
+    <p class="text-center text-red-500 mb-5">
+      Din varukorg är tom — lägg till produkter innan du går till kassan.
+    </p>
+  }
   <ul class="flex flex-col items-center">
     @for (item of cartService.getCartItems(); track item.product.id) {
       <li>
         {{ item.product.name }}
       </li>
       <p>{{ item.quantity }}</p>
+      <button (click)="cartService.addToCart(item.product, 1)">+</button>
+      <button (click)="cartService.removeFromCart(item.product, 1)">-</button>
+      <button (click)="cartService.clearItem(item.product)">Remove item</button>
       <li>{{ item.product.price | currency }}</li>
     }
-    <p>Cart items: {{ cartService.getTotalQuantity() }}</p>
-    <p>Total price: {{ cartService.getTotalPrice() | currency }}</p>
+    @if (cartService.isEmpty()) {
+    } @else {
+      <p>Cart items: {{ cartService.getTotalQuantity() }}</p>
+      <p>Total price: {{ cartService.getTotalPrice() | currency }}</p>
+    }
+
+    @if (showCheckoutButton()) {
+      <a
+        [routerLink]="cartService.isEmpty() ? null : ['/checkout']"
+        [class.opacity-40]="cartService.isEmpty()"
+        [class.pointer-events-none]="cartService.isEmpty()"
+        class="rounded-2xl bg-green-400 p-1 inline-block text-center"
+      >
+        Checkout
+      </a>
+    }
   </ul>
 </div>
