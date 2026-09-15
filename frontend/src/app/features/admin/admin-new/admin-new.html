@@ -1,4 +1,49 @@
-<div>
-  <h1>Add new product</h1>
-  <a [routerLink]="['/admin']"><-Back to product list</a>
+<div class="flex">
+  <a
+    [routerLink]="['/admin']"
+    class="font-bold text-2xl hover:bg-fuchsia-200 border-2 rounded-2xl p-2"
+    ><-Back to product list</a
+  >
 </div>
+
+<h1 class="flex justify-center text-3xl font-medium mb-4">Add new product</h1>
+<form [formGroup]="addProductForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center gap-5">
+  <label
+    >Name
+    <input formControlName="name" class="border-2 rounded-lg p-2" />
+  </label>
+  <label
+    >Description
+    <input formControlName="description" class="border-2 rounded-lg p-2" />
+  </label>
+  <label
+    >Price
+    <input formControlName="price" class="border-2 rounded-lg p-2" />
+  </label>
+  <label
+    >Image URL
+    <input formControlName="image_url" class="border-2 rounded-lg p-2" />
+  </label>
+  <label
+    >STOCK
+    <input formControlName="stock" class="border-2 rounded-lg p-2" />
+  </label>
+  <label
+    >SKU
+    <input
+      type="text"
+      formControlName="sku"
+      pattern="[A-Z]{3}[0-9]{3}"
+      required
+      title="Format: 3 bokstäver (A-Z) följt av 3 siffror, t.ex. ABC123"
+      class="border-2 rounded-lg p-2"
+    />
+  </label>
+  <button
+    type="submit"
+    [disabled]="addProductForm.invalid"
+    class="border-2 w-fit p-2 rounded-2xl disabled:opacity-40 disabled:cursor-not-allowed"
+  >
+    Add product
+  </button>
+</form>

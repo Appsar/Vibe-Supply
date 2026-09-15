@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../../shared/models/product.model';
 import { ProductsService } from '../products';
 import { CurrencyPipe } from '@angular/common';
+import { CartService } from '../../../core/services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,6 +14,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductDetail implements OnInit {
   product = signal<Product | null>(null);
+  cartService = inject(CartService);
 
   private route = inject(ActivatedRoute);
 

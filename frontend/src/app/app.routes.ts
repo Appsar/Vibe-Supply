@@ -15,7 +15,6 @@ export const routes: Routes = [
   { path: '', component: Home },
   { path: 'products', component: ProductList },
   { path: 'products/:id', component: ProductDetail },
-  { path: 'products/:id', component: ProductDetail },
   { path: 'user', component: Userpage, canActivate: [authGuard] },
   { path: 'login', component: Login },
   { path: 'cart', component: Cart },

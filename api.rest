@@ -1,0 +1,29 @@
+### Get all issues
+GET http://localhost:3000/api/products
+
+### Get one issue
+GET http://localhost:3000/api/products/2
+
+### Create an issue
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "aa@live.se",
+  "password": "aa",
+  "name": "snabel"
+}
+
+### Login
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "aa@live.se",
+  "password": "aa"
+}
+
+### Deletet an issue
+DELETE  http://localhost:3000/api/products/2
+
+

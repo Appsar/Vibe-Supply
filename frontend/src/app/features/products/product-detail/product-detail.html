@@ -13,6 +13,7 @@
       <p>{{ p.description }}</p>
       <p>{{ 'In stock - ' + p.stock + ' left' }}</p>
       <button
+        (click)="cartService.addToCart(p, 1)"
         class="bg-green-400 rounded-2xl p-2 shadow-2xl hover:scale-105 transition-transform duration-200"
       >
         Add to cart

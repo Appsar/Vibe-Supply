@@ -21,4 +21,8 @@ export class ProductsService {
   create(product: Partial<Product>): Observable<Product> {
     return this.http.post<Product>(this.apiUrl, product);
   }
+
+  delete(id: number): Observable<Product> {
+    return this.http.delete<Product>(`${this.apiUrl}/${id}`);
+  }
 }

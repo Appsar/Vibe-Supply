@@ -16,6 +16,10 @@ export class ProductList implements OnInit {
   products = signal<Product[]>([]);
   cartService = inject(CartService);
 
+  generateSlug(name: string): string {
+    return name.toLowerCase().replace(/ /g, '-');
+  }
+
   ngOnInit(): void {
     this.productService.getAll().subscribe({
       next: (data) => this.products.set(data),

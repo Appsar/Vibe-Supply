@@ -24,7 +24,7 @@ const runSeed = db.transaction(() => {
   }
 
   const insertProducts = db.prepare(
-    `INSERT INTO products (category_id, name, description, price, image_url, stock) VALUES (?,?,?,?,?,?)`,
+    `INSERT INTO products (category_id, name, description, price, image_url, stock, sku) VALUES (?,?,?,?,?,?,?)`,
   );
 
   const products = [
@@ -35,6 +35,7 @@ const runSeed = db.transaction(() => {
       price: 549.0,
       image_url: '/images/hoodie-classic.jpg',
       stock: 25,
+      sku: 'HOD100',
     },
     {
       category: 'Hoodies',
@@ -43,6 +44,7 @@ const runSeed = db.transaction(() => {
       price: 499.0,
       image_url: '/images/hoodie-zip.jpg',
       stock: 18,
+      sku: 'HOD101',
     },
     {
       category: 'T-Shirts',
@@ -51,6 +53,7 @@ const runSeed = db.transaction(() => {
       price: 199.0,
       image_url: '/images/tee-essential.jpg',
       stock: 50,
+      sku: 'TEE100',
     },
     {
       category: 'T-Shirts',
@@ -59,6 +62,7 @@ const runSeed = db.transaction(() => {
       price: 229.0,
       image_url: '/images/tee-logo.jpg',
       stock: 40,
+      sku: 'TEE101',
     },
     {
       category: 'Pants',
@@ -67,6 +71,7 @@ const runSeed = db.transaction(() => {
       price: 649.0,
       image_url: '/images/pants-cargo.jpg',
       stock: 15,
+      sku: 'PAN100',
     },
     {
       category: 'Shoes',
@@ -75,6 +80,7 @@ const runSeed = db.transaction(() => {
       price: 799.0,
       image_url: '/images/shoes-canvas.jpg',
       stock: 20,
+      sku: 'SHO100',
     },
     {
       category: 'Accessories',
@@ -83,6 +89,7 @@ const runSeed = db.transaction(() => {
       price: 149.0,
       image_url: '/images/cap-embroidered.jpg',
       stock: 35,
+      sku: 'ACC100',
     },
   ];
 
@@ -94,6 +101,7 @@ const runSeed = db.transaction(() => {
       p.price,
       p.image_url,
       p.stock,
+      p.sku,
     );
   }
 

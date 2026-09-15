@@ -22,7 +22,8 @@ export function initDB() {
     description TEXT,
     price REAL NOT NULL,
     image_url TEXT,
-    stock INTEGER NOT NULL DEFAULT 0
+    stock INTEGER NOT NULL DEFAULT 0,
+    sku TEXT UNIQUE NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS orders (

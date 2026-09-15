@@ -7,7 +7,7 @@
       <h3>{{ product.name }}</h3>
       <p>{{ product.price }}</p>
       <a
-        [routerLink]="['/products', product.id]"
+        [routerLink]="['/products', product.id + '-' + generateSlug(product.name)]"
         class="inline-block font-bold transition-transform duration-200 hover:scale-105"
         >More details</a
       >
