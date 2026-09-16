@@ -1,3 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap');
 @import 'tailwindcss';
+
+@theme {
+  --font-display: 'Archivo Black', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --color-vibe-bg: #f5f5f0;
+  --color-vibe-ink: #111111;
+  --color-vibe-accent: #ff4b1f;
+  --color-vibe-border: #e5e5e0;
+}
+
+body {
+  background-color: var(--color-vibe-bg);
+  color: var(--color-vibe-ink);
+  font-family: var(--font-body);
+}

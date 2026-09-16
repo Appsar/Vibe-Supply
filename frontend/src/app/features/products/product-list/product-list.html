@@ -1,23 +1,37 @@
-<h1 class="flex justify-center text-5xl mb-10">All Products</h1>
+<h1 class="font-display text-5xl mb-10 mt-5 text-center">All Products</h1>
 
-<div class="flex gap-10 justify-center">
-  @for (product of products(); track product.id) {
-    <div class="product-card flex flex-col">
-      <img [src]="product.image_url" [alt]="product.name" />
-      <h3>{{ product.name }}</h3>
-      <p>{{ product.price }}</p>
-      <a
-        [routerLink]="['/products', product.id + '-' + generateSlug(product.name)]"
-        class="inline-block font-bold transition-transform duration-200 hover:scale-105"
-        >More details</a
-      >
-      <button class="bg-green-400 rounded-2xl p-1.5 hover:sc">
-        <span
-          class="hover:scale-105 inline-block duration-200 font-medium"
-          (click)="cartService.addToCart(product, 1)"
-          >Add to cart</span
+@if (searchTerm().length > 0) {
+  <p class="text-xl mb-8 text-center">Found {{ filteredProducts().length }} items</p>
+}
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-8">
+  @for (product of filteredProducts(); track product.id) {
+    <div class="group cursor-pointer">
+      <div class="aspect-square overflow-hidden bg-vibe-border mb-3">
+        <img
+          [src]="product.image_url"
+          [alt]="product.name"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+
+      <h3 class="font-display text-lg">{{ product.name }}</h3>
+      <p class="text-vibe-accent font-medium mb-3">{{ product.price | currency }}</p>
+
+      <div class="flex items-center gap-3">
+        <a
+          [routerLink]="['/products', product.id + '-' + generateSlug(product.name)]"
+          class="text-sm underline hover:text-vibe-accent transition-colors"
         >
-      </button>
+          More details
+        </a>
+        <button
+          (click)="cartService.addToCart(product, 1)"
+          class="bg-vibe-ink text-vibe-bg px-4 py-1.5 text-sm font-medium hover:bg-vibe-accent transition-colors"
+        >
+          Add to cart
+        </button>
+      </div>
     </div>
   }
 </div>

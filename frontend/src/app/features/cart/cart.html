@@ -12,6 +12,11 @@
   <ul class="flex flex-col gap-4">
     @for (item of cartService.getCartItems(); track item.product.id) {
       <li class="flex items-center justify-between border-b-2 pb-4 gap-4">
+        <img
+          [src]="item.product.image_url"
+          [alt]="item.product.name"
+          class="w-16 h-16 object-cover rounded-md shrink-0"
+        />
         <span class="flex-1">{{ item.product.name }}</span>
 
         <div class="flex items-center gap-2 text-lg">
@@ -34,9 +39,19 @@
 
         <button
           (click)="cartService.clearItem(item.product)"
-          class="text-red-500 text-base hover:underline"
+          class="text-red-500 text-base hover:underline hover:scale-110 duration-200"
         >
-          Remove
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#000000"
+          >
+            <path
+              d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+            />
+          </svg>
         </button>
       </li>
     }
