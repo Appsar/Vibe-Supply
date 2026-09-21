@@ -1,48 +1,107 @@
-<div class="flex justify-between items-center px-8 py-5 border-vibe-accent">
+<div
+  class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 px-4 sm:px-8 py-5 border-b border-vibe-accent"
+>
   <h1 class="text-2xl tracking-tight font-display font-medium">Products</h1>
   <a
     [routerLink]="['/admin/new']"
-    class="border-2 rounded-2xl p-1.5 font-display tracking-tight hover:text-vibe-accent transition-colors"
-    >Add New Product</a
+    class="border-2 rounded-2xl px-4 py-1.5 font-display tracking-tight hover:text-vibe-accent transition-colors"
   >
+    Add New Product
+  </a>
 </div>
 
-<table class="w-full border-collapse border-vibe-accent">
-  <thead>
-    <tr class="border-b-2 text-left">
-      <th>Name</th>
-      <th>Price</th>
-      <th>Description</th>
-      <th>Stock</th>
-    </tr>
-  </thead>
-  <tbody class="border-b">
+<div class="p-4 sm:px-8 py-6">
+  <!-- Mobile View-->
+  <div class="grid grid-cols-1 gap-4 md:hidden">
     @for (p of products(); track p.id) {
-      <tr>
-        <td>
-          <a class="hover:text-vibe-accent transition-colors" [routerLink]="['/products/', p.id]">{{
-            p.name
-          }}</a>
-        </td>
-        <td>{{ p.price | currency }}</td>
-        <td>{{ p.description }}</td>
-        <td>{{ p.stock }}</td>
-        <td>
-          <button (click)="onDelete(p.id)" class="hover:text-vibe-accent">
+      <div
+        class="border rounded-2xl p-4 flex flex-col justify-between space-y-3 bg-white shadow-sm border-vibe-accent"
+      >
+        <div class="flex justify-between items-start">
+          <a
+            class="font-bold text-lg hover:text-vibe-accent transition-colors"
+            [routerLink]="['/products', p.id + '-' + slug(p.name)]"
+          >
+            {{ p.name }}
+          </a>
+          <button
+            (click)="onDelete(p.id)"
+            class="text-red-500 hover:text-vibe-accent transition-colors p-1"
+            aria-label="Delete product"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              height="24px"
+              height="20px"
               viewBox="0 -960 960 960"
-              width="24px"
-              fill="#000000"
+              width="20px"
+              fill="currentColor"
             >
               <path
                 d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
               />
             </svg>
           </button>
-        </td>
-      </tr>
+        </div>
+
+        <p class="text-sm text-gray-600 line-clamp-2">{{ p.description }}</p>
+
+        <div class="flex justify-between items-center text-sm pt-2 border-t">
+          <span class="font-semibold text-base">{{ p.price | currency }}</span>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-gray-100 font-medium"
+            >Stock: {{ p.stock }}</span
+          >
+        </div>
+      </div>
     }
-  </tbody>
-</table>
+  </div>
+
+  <div class="hidden md:block overflow-x-auto">
+    <table class="w-full border-collapse border-vibe-accent text-left">
+      <thead>
+        <tr class="border-b-2">
+          <th class="py-3 px-4">Name</th>
+          <th class="py-3 px-4">Price</th>
+          <th class="py-3 px-4">Description</th>
+          <th class="py-3 px-4">Stock</th>
+          <th class="py-3 px-4 text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of products(); track p.id) {
+          <tr class="border-b hover:bg-gray-50/50 transition-colors">
+            <td class="py-3 px-4 font-medium">
+              <a
+                class="hover:text-vibe-accent transition-colors"
+                [routerLink]="['/products', p.id + '-' + slug(p.name)]"
+              >
+                {{ p.name }}
+              </a>
+            </td>
+            <td class="py-3 px-4 whitespace-nowrap">{{ p.price | currency }}</td>
+            <td class="py-3 px-4 max-w-xs truncate">{{ p.description }}</td>
+            <td class="py-3 px-4">{{ p.stock }}</td>
+            <td class="py-3 px-4 text-right">
+              <button
+                (click)="onDelete(p.id)"
+                class="hover:text-vibe-accent transition-colors"
+                aria-label="Delete product"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="20px"
+                  viewBox="0 -960 960 960"
+                  width="20px"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+                  />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -4,6 +4,8 @@ import { ProductsService } from '../products';
 import { Product } from '../../../shared/models/product.model';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
+import { generateSlug } from '../../../shared/utility/slug';
+import { MobileMenuService } from '../../../core/services/mobile-menu.service';
 
 @Component({
   selector: 'app-product-list',
@@ -16,6 +18,11 @@ export class ProductList implements OnInit {
   products = signal<Product[]>([]);
   cartService = inject(CartService);
   searchTerm = signal('');
+  menuService = inject(MobileMenuService);
+
+  slug(name: string) {
+    return generateSlug(name);
+  }
 
   filteredProducts = computed(() => {
     return this.products().filter((e) =>
@@ -24,10 +31,6 @@ export class ProductList implements OnInit {
   });
 
   private route = inject(ActivatedRoute);
-
-  generateSlug(name: string): string {
-    return name.toLowerCase().replace(/ /g, '-');
-  }
 
   ngOnInit(): void {
     this.productService.getAll().subscribe({

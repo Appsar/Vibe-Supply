@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ProductsService } from '../products/products';
 import { Product } from '../../shared/models/product.model';
 import { CurrencyPipe } from '@angular/common';
+import { generateSlug } from '../../shared/utility/slug';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +14,10 @@ import { CurrencyPipe } from '@angular/common';
 export class Admin {
   productService = inject(ProductsService);
   products = signal<Product[]>([]);
+
+  slug(name: string) {
+    return generateSlug(name);
+  }
 
   onDelete(id: number): void {
     this.productService.delete(id).subscribe({

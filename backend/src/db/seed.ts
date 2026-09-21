@@ -5,26 +5,13 @@ initDB();
 
 const runSeed = db.transaction(() => {
   db.exec(`
-    DELETE FROM order_items;
-    DELETE FROM orders;
     DELETE FROM products;
-    DELETE FROM categories;
     DELETE FROM users;
     DELETE FROM sqlite_sequence;
     `);
 
-  const insertCategory = db.prepare(`INSERT INTO categories (name) VALUES (?)`);
-
-  const categories = ['Hoodies', 'T-Shirts', 'Pants', 'Shoes', 'Accessories'];
-  const categoryIds: Record<string, number> = {};
-
-  for (const name of categories) {
-    const result = insertCategory.run(name);
-    categoryIds[name] = result.lastInsertRowid as number;
-  }
-
   const insertProducts = db.prepare(
-    `INSERT INTO products (category_id, name, description, price, image_url, stock, sku) VALUES (?,?,?,?,?,?,?)`,
+    `INSERT INTO products (name, description, price, image_url, stock, sku) VALUES (?,?,?,?,?,?)`,
   );
 
   const products = [
@@ -189,7 +176,6 @@ const runSeed = db.transaction(() => {
 
   for (const p of products) {
     insertProducts.run(
-      categoryIds[p.category],
       p.name,
       p.description,
       p.price,
@@ -199,9 +185,7 @@ const runSeed = db.transaction(() => {
     );
   }
 
-  console.log(
-    `Seeded ${categories.length} categories and ${products.length} products.`,
-  );
+  console.log(`Seeded ${products.length} products.`);
 });
 
 try {

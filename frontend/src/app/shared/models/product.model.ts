@@ -7,4 +7,5 @@ export interface Product {
   image_url: string;
   stock: number;
   sku: string;
+  created_at: string;
 }

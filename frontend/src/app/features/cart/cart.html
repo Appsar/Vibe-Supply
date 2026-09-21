@@ -1,5 +1,5 @@
 <div class="flex justify-center">
-  <h2 class="text-4xl font-medium mb-5">Your shopping cart:</h2>
+  <h2 class="text-4xl mt-4 font-medium mb-5 text-center">Your shopping cart:</h2>
 </div>
 
 <div class="flex justify-center flex-col text-2xl max-w-2xl mx-auto px-4">
@@ -11,56 +11,64 @@
 
   <ul class="flex flex-col gap-4">
     @for (item of cartService.getCartItems(); track item.product.id) {
-      <li class="flex items-center justify-between border-b-2 pb-4 gap-4">
-        <img
-          [src]="item.product.image_url"
-          [alt]="item.product.name"
-          class="w-16 h-16 object-cover rounded-md shrink-0"
-        />
-        <span class="flex-1">{{ item.product.name }}</span>
-
-        <div class="flex items-center gap-2 text-lg">
-          <button
-            (click)="cartService.addToCart(item.product, 1)"
-            class="border-2 w-8 h-8 rounded-full hover:bg-gray-100"
-          >
-            +
-          </button>
-          <span class="w-6 text-center">{{ item.quantity }}</span>
-          <button
-            (click)="cartService.removeFromCart(item.product, 1)"
-            class="border-2 w-8 h-8 rounded-full hover:bg-gray-100"
-          >
-            -
-          </button>
+      <li
+        class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b-2 pb-4 gap-4"
+      >
+        <div class="flex items-center gap-4">
+          <img
+            [src]="item.product.image_url"
+            [alt]="item.product.name"
+            class="w-16 h-16 object-cover rounded-md shrink-0"
+          />
+          <span class="flex-1 sm:flex-none">{{ item.product.name }}</span>
         </div>
 
-        <span class="w-24 text-right">{{ item.product.price | currency }}</span>
+        <div class="flex items-center justify-between sm:justify-end gap-4 sm:gap-6">
+          <div class="flex items-center gap-2 text-lg">
+            <button
+              (click)="cartService.addToCart(item.product, 1)"
+              class="border-2 w-8 h-8 rounded-full hover:bg-gray-100 shrink-0"
+            >
+              +
+            </button>
+            <span class="w-6 text-center">{{ item.quantity }}</span>
+            <button
+              (click)="cartService.removeFromCart(item.product, 1)"
+              class="border-2 w-8 h-8 rounded-full hover:bg-gray-100 shrink-0"
+            >
+              -
+            </button>
+          </div>
 
-        <button
-          (click)="cartService.clearItem(item.product)"
-          class="text-red-500 text-base hover:underline hover:scale-110 duration-200"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 -960 960 960"
-            width="24px"
-            fill="#000000"
+          <span class="w-20 sm:w-24 text-right">{{ item.product.price | currency }}</span>
+
+          <button
+            (click)="cartService.clearItem(item.product)"
+            class="text-red-500 hover:scale-110 transition-transform duration-200 shrink-0"
           >
-            <path
-              d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
-            />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#000000"
+            >
+              <path
+                d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+              />
+            </svg>
+          </button>
+        </div>
       </li>
     }
   </ul>
 
   @if (!cartService.isEmpty()) {
-    <div class="flex flex-col items-end gap-1 mt-6 border-t-2 pt-4">
-      <p class="text-lg">Cart items: {{ cartService.getTotalQuantity() }}</p>
-      <p class="font-bold">Total price: {{ cartService.getTotalPrice() | currency }}</p>
+    <div class="flex flex-col items-center gap-1 mt-6 border-t-2 pt-4 md:items-end">
+      <p class="text-lg text-center w-full">Cart items: {{ cartService.getTotalQuantity() }}</p>
+      <p class="font-bold border-b-4 w-full text-center border-vibe-accent pb-1 rounded-xl">
+        Total price: {{ cartService.getTotalPrice() | currency }}
+      </p>
     </div>
   }
 
