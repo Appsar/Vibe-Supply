@@ -20,6 +20,14 @@ export class ProductList implements OnInit {
   searchTerm = signal('');
   menuService = inject(MobileMenuService);
 
+  justAddedId = signal<number | string | null>(null);
+
+  onAddToCart(product: Product, quantity: number): void {
+    this.cartService.addToCart(product, quantity);
+    this.justAddedId.set(product.id);
+    setTimeout(() => this.justAddedId.set(null), 1300);
+  }
+
   slug(name: string) {
     return generateSlug(name);
   }

@@ -25,10 +25,10 @@
       <p>{{ p.description }}</p>
       <p>{{ 'In stock - ' + p.stock + ' left' }}</p>
       <button
-        (click)="cartService.addToCart(p, 1)"
+        (click)="onAddToCart(p, 1)"
         class="hover:text-vibe-accent mb-10 border-vibe-accent border-2 rounded-2xl p-2 shadow-2xl hover:scale-105 transition-transform duration-200"
       >
-        Add to cart
+        {{ justAddedId() === p.id ? 'Added' : 'Add to cart' }}
       </button>
     } @else {
       <p>Loading...</p>

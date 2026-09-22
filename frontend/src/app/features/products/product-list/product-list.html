@@ -27,10 +27,10 @@
           More details
         </a>
         <button
-          (click)="cartService.addToCart(product, 1)"
+          (click)="onAddToCart(product, 1)"
           class="bg-vibe-ink text-vibe-bg px-4 py-1.5 text-sm font-medium hover:bg-vibe-accent transition-colors"
         >
-          Add to cart
+          {{ justAddedId() === product.id ? 'Added' : 'Add to cart' }}
         </button>
       </div>
     </div>

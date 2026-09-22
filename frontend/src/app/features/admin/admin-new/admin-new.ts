@@ -21,14 +21,19 @@ export class AdminNew {
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     sku: new FormControl('', Validators.required),
-    price: new FormControl('', Validators.required),
+    price: new FormControl('', [Validators.required, Validators.min(0)]),
     image_url: new FormControl('', Validators.required),
-    stock: new FormControl('', Validators.required),
+    stock: new FormControl('', [Validators.required, Validators.min(0)]),
   });
+
+  hasError(controlName: string, errorName: string): boolean {
+    const control = this.addProductForm.get(controlName);
+    return !!(control && control.hasError(errorName) && control.touched);
+  }
 
   onSubmit(): void {
     const { name, image_url, description, price, stock, sku } = this.addProductForm.value;
-    if (!name || !image_url) return;
+    if (!name || !image_url || !description || !price || !stock || !sku) return;
 
     const newProduct: Partial<Product> = {
       name,
@@ -40,7 +45,7 @@ export class AdminNew {
     };
 
     this.productService.create(newProduct).subscribe({
-      next: (createdProduct) => {
+      next: () => {
         this.router.navigate(['/admin']);
       },
       error: (err) => console.error('Failed to create product', err),

@@ -21,6 +21,14 @@ export class ProductDetail implements OnInit {
 
   productListScroll = signal<Product[]>([]);
 
+  justAddedId = signal<number | string | null>(null);
+
+  onAddToCart(product: Product, quantity: number): void {
+    this.cartService.addToCart(product, quantity);
+    this.justAddedId.set(product.id);
+    setTimeout(() => this.justAddedId.set(null), 1300);
+  }
+
   currentIndex = signal(0);
 
   limitedProducts = computed(() => this.productListScroll().slice(0, 6));

@@ -19,6 +19,14 @@ export class Home {
   products = signal<Product[]>([]);
   cartService = inject(CartService);
 
+  justAddedId = signal<number | string | null>(null);
+
+  onAddToCart(product: Product, quantity: number): void {
+    this.cartService.addToCart(product, quantity);
+    this.justAddedId.set(product.id);
+    setTimeout(() => this.justAddedId.set(null), 1300);
+  }
+
   slug(name: string) {
     return generateSlug(name);
   }

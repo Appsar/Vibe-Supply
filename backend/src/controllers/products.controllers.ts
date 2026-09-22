@@ -22,8 +22,7 @@ export function getProductById(req: Request, res: Response) {
 
 // Create a new product and add to database
 export function createProduct(req: Request, res: Response) {
-  const { category_id, name, description, price, image_url, stock, sku } =
-    req.body;
+  const { name, description, price, image_url, stock, sku } = req.body;
 
   if (!name || !price) {
     return res.status(409).json({ error: 'Name and price are required' });
@@ -32,11 +31,10 @@ export function createProduct(req: Request, res: Response) {
   const result = db
     .prepare(
       `
-    INSERT INTO products (category_id, name, description, price, image_url, stock, sku) VALUES (?,?,?,?,?,?,?)
+    INSERT INTO products ( name, description, price, image_url, stock, sku) VALUES (?,?,?,?,?,?)
     `,
     )
     .run(
-      category_id ?? null,
       name,
       description ?? '',
       price,
