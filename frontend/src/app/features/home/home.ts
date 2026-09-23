@@ -19,22 +19,25 @@ export class Home {
   products = signal<Product[]>([]);
   cartService = inject(CartService);
 
+  // For add to cart button to match id for right button
   justAddedId = signal<number | string | null>(null);
 
+  //When pressing on add to cart adds one item to cart and also changes the button name for a secound to added for feedback for use
   onAddToCart(product: Product, quantity: number): void {
     this.cartService.addToCart(product, quantity);
     this.justAddedId.set(product.id);
     setTimeout(() => this.justAddedId.set(null), 1300);
   }
-
+  // Generate a slug name when navigating to detail page
   slug(name: string) {
     return generateSlug(name);
   }
-
+  // Utility function to check if an added item is added within 7 days
   isNew(created_at: string) {
     return dateCheck(created_at);
   }
 
+  // Gets all products from database and store in signal
   ngOnInit(): void {
     this.productsService.getAll().subscribe({
       next: (data) => this.products.set(data),

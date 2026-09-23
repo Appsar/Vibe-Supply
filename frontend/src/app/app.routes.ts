@@ -10,6 +10,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { Checkout } from './features/checkout/checkout';
 import { Admin } from './features/admin/admin';
 import { AdminNew } from './features/admin/admin-new/admin-new';
+import { NotFound } from './features/not-found/not-found';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -21,4 +22,5 @@ export const routes: Routes = [
   { path: 'checkout', component: Checkout },
   { path: 'admin', component: Admin, canActivate: [authGuard] },
   { path: 'admin/new', component: AdminNew, canActivate: [authGuard] },
+  { path: '**', component: NotFound },
 ];

@@ -1,5 +1,6 @@
 import db from './database.js';
 
+//Initiates when server starts to generate tables if they dont exist
 export function initDB() {
   db.exec(`
   CREATE TABLE IF NOT EXISTS users (

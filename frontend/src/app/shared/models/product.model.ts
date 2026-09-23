@@ -1,6 +1,5 @@
 export interface Product {
   id: number;
-  category_id: number;
   name: string;
   description: string;
   price: number;
@@ -9,3 +8,5 @@ export interface Product {
   sku: string;
   created_at: string;
 }
+
+//Model for Product and everything it needs

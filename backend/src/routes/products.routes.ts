@@ -8,6 +8,7 @@ import {
 
 const router = Router();
 
+//Routes for product CRUD
 router.get('/', getAllProducts);
 router.get('/:id', getProductById);
 router.post('/', createProduct);

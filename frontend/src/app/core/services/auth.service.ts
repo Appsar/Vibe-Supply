@@ -11,19 +11,23 @@ export class AuthService {
 
   isLoggedIn = signal<boolean>(!!localStorage.getItem(this.tokenKey));
 
+  // Login for user with right email and password
   login(email: string, password: string) {
     return this.http.post<{ token: string; user: any }>(`${this.apiUrl}`, { email, password });
   }
 
+  // Sets login token
   setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
     this.isLoggedIn.set(true);
   }
 
+  // Gets token from localstorage
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
 
+  // Logout for user
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.isLoggedIn.set(false);

@@ -1,59 +1,71 @@
-# Projekt
+# Vibe Supply
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.22.
+A full-stack e-commerce site for streetwear, built as a school project using Angular, TypeScript, Express, and SQLite.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Product catalog with search, category browsing, and product detail pages
+- Shopping cart with persistent storage (localStorage)
+- Checkout flow (Kunduppgifter form, per wireframe)
+- User registration/login (JWT-based auth)
+- Admin panel — view all products, add new products, delete products
+- "Nyhet" badge on products added within the last 7 days
+- Responsive design (mobile, tablet, desktop)
 
-```bash
-ng serve
-```
+## Tech stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Frontend**: Angular 21 (standalone components, signals), TypeScript, Tailwind CSS v4
+- **Backend**: Node.js, Express, TypeScript
+- **Database**: SQLite (via better-sqlite3)
+- **Auth**: JWT + bcrypt
 
-## Code scaffolding
+See `AGENTS.md` for full project structure and conventions.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Setup
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+1. Install dependencies:
 
 ```bash
-ng build
+   cd backend && npm install
+   cd ../frontend && npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+2. Seed the database (creates `vibe-supply.db` with sample products):
 
 ```bash
-ng test
+   cd backend
+   npx tsx src/db/seed.ts
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+3. Start the backend (keep this terminal running):
 
 ```bash
-ng e2e
+   npx tsx src/server.ts
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Runs on `http://localhost:3000`
 
-## Additional Resources
+4. In a separate terminal, start the frontend:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+   cd frontend
+   ng serve
+```
+
+Runs on `http://localhost:4200`
+
+## Test account
+
+You can register a new account via the site, or use:
+
+- Email: `test@example.com`
+- Password: `password123`
+  _(only needed to access `/admin` — logging in isn't otherwise required to browse/shop)_
+
+## Project structure & conventions
+
+See `AGENTS.md`.
+
+---
+
+_This project was originally scaffolded with [Angular CLI](https://github.com/angular/angular-cli)._

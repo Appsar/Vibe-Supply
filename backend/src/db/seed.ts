@@ -3,6 +3,7 @@ import { initDB } from './schema.js';
 
 initDB();
 
+// Reset function for database
 const runSeed = db.transaction(() => {
   db.exec(`
     DELETE FROM products;
@@ -10,10 +11,12 @@ const runSeed = db.transaction(() => {
     DELETE FROM sqlite_sequence;
     `);
 
+  //Inserts test data into database
   const insertProducts = db.prepare(
     `INSERT INTO products (name, description, price, image_url, stock, sku) VALUES (?,?,?,?,?,?)`,
   );
 
+  // Data to use during testing
   const products = [
     {
       category: 'Hoodies',
@@ -174,6 +177,7 @@ const runSeed = db.transaction(() => {
     },
   ];
 
+  // Loops over all test data to instert
   for (const p of products) {
     insertProducts.run(
       p.name,

@@ -17,6 +17,7 @@ export class AdminNew {
 
   errorMessage = signal<string | null>(null);
 
+  // Form Group for adding new product to backend, validation on all inputs
   addProductForm = new FormGroup({
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
@@ -26,11 +27,13 @@ export class AdminNew {
     stock: new FormControl('', [Validators.required, Validators.min(0)]),
   });
 
+  // Error handeling for form if missing input
   hasError(controlName: string, errorName: string): boolean {
     const control = this.addProductForm.get(controlName);
     return !!(control && control.hasError(errorName) && control.touched);
   }
 
+  // When submiting form checks validation and all of the inputs are there then push the product into backend database
   onSubmit(): void {
     const { name, image_url, description, price, stock, sku } = this.addProductForm.value;
     if (!name || !image_url || !description || !price || !stock || !sku) return;

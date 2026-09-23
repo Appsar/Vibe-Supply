@@ -8,3 +8,4 @@ import { RouterLink } from '@angular/router';
   styleUrl: './userpage.css',
 })
 export class Userpage {}
+// Scraped component just an extra step before going to admin page. Displays if you are logged in

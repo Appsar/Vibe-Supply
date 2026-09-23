@@ -16,12 +16,14 @@ export class Header {
   private router = inject(Router);
   searchTerm = signal('');
 
-  mobileMenuService = inject(MobileMenuService);
+  mobileMenuService = inject(MobileMenuService); // Mobile version to toggle menu dropdown
 
+  //Logout function in navbar and only displays when you are logged in
   logout(): void {
     this.authService.logout();
   }
 
+  //Search function that navigate to products and display products based on searched input in navbar
   onSearch(): void {
     this.router.navigate(['/products'], { queryParams: { search: this.searchTerm() } });
     this.searchTerm.set('');

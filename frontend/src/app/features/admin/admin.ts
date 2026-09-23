@@ -15,10 +15,12 @@ export class Admin {
   productService = inject(ProductsService);
   products = signal<Product[]>([]);
 
+  //Generate slug when navigating to detail page
   slug(name: string) {
     return generateSlug(name);
   }
 
+  // Deletes product fully from front and backend
   onDelete(id: number): void {
     this.productService.delete(id).subscribe({
       next: () => {
@@ -28,6 +30,7 @@ export class Admin {
     });
   }
 
+  // Get all products and store them in signal for render on page
   ngOnInit(): void {
     this.productService.getAll().subscribe({
       next: (data) => this.products.set(data),

@@ -16,11 +16,13 @@ export class Login {
 
   errorMessage = signal<string | null>(null);
 
+  // Simple form group for the login form
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
 
+  // When trying to login validate that there is an email and password present and then login the user via the authservice login
   onSubmit(): void {
     const { email, password } = this.loginForm.value;
     if (!email || !password) return;

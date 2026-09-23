@@ -12,3 +12,5 @@ export function dateCheck(created_at: string): boolean {
     return false;
   }
 }
+
+//Checks if a product has been added within 7 days

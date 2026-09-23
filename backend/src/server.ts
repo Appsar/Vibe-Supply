@@ -8,6 +8,7 @@ import { initDB } from './db/schema.js';
 const app = express();
 const PORT = 3000;
 
+//Routes uses api first
 app.use(cors());
 app.use(express.json());
 app.use('/api/products', productsRouter);
@@ -15,6 +16,7 @@ app.use('/api/auth', authRoter);
 
 initDB();
 
+//Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
